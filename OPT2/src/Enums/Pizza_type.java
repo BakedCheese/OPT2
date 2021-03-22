@@ -1,5 +1,9 @@
 package Enums;
 
 public enum Pizza_type {
-    Pepperoni
+    Margherita,
+    Pepperoni,
+    Quattro_Formaggi,
+    Tonno,
+
 }
