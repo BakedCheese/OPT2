@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Menus {
 
     //Will create a Space between panels
-    public static void Space(){
+    private static void Space(){
         System.out.println("\n---------------------------------------\n");
     }
 
