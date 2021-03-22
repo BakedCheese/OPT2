@@ -1,5 +1,4 @@
 import Enums.Pizza_size;
-import com.sun.jdi.DoubleValue;
 
 public class Delivery {
     private Pizza pizza;
@@ -20,6 +19,7 @@ public class Delivery {
         this.street = street;
         this.city = city;
         this.house_number = house_number;
+        this.house_numberExtras = house_numberExtras;
 
         deliveryPrice = 1.5;
 
@@ -34,8 +34,10 @@ public class Delivery {
     }
 
     public String getAllInformation(){
-        String AllInfo =  "\nPizza type:        " + getPizza().getPizza_type()
-                        + "\nPizza Size:        " + getPizza_size()
+
+
+        return            "\nPizza type:        " + getPizza().getPizza_type()
+                        + "\nPizza size:        " + getPizza_size()
                         + "\n\nAddress:         "
                         + "\nZip/postal code:   " + getZipcode()
                         + "\nStreet name:       " + getStreet()
@@ -47,23 +49,16 @@ public class Delivery {
                         + "\nCost of Delivery:  $ " + getDeliveryPrice()
                         + "\n"
                         + "\nTotal Cost:        $ " + getTotalPriceDelivery(getPizza().getPrice(), getSizePrice(), getDeliveryPrice());
-
-
-        return AllInfo;
     }
 
 
     private Double getSizePrice(){
-        switch (getPizza_size()){
-            case Small:
-                return 0.0;
-            case Medium:
-                return 1.0;
-            case Large:
-                return 2.0;
-            default:
-                return null;
-        }
+        return switch (getPizza_size()) {
+            case Small -> 0.0;
+            case Medium -> 1.0;
+            case Large -> 2.0;
+            default -> null;
+        };
     }
 
     public Pizza getPizza() {
