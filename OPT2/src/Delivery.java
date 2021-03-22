@@ -10,7 +10,7 @@ public class Delivery {
     private Integer house_number;
     private String house_numberExtras;
 
-    private Double deliveryPrice;
+    private final Double deliveryPrice;
 
 
     public Delivery(Pizza pizza, Pizza_size pizza_size, String zipcode, String street, String city, Integer house_number, String house_numberExtras) {
