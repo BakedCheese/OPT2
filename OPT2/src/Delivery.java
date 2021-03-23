@@ -36,7 +36,7 @@ public class Delivery {
     public String getAllInformation(){
 
 
-        return            "\nPizza type:        " + getPizza().getPizza_type()
+        return            "Pizza type:        " + getPizza().getPizza_type()
                         + "\nPizza size:        " + getPizza_size()
                         + "\n\nAddress:         "
                         + "\nZip/postal code:   " + getZipcode()

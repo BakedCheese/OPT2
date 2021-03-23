@@ -86,7 +86,7 @@ public class Menus {
             System.out.println("You have chosen: " + pizza.getPizza_type());
         }else{
             System.out.println("Chosen number is out of bounds, please try again.");
-            Panel_NewDelivery();
+            return;
         }
 
         System.out.println("What is the size of the pizza (pick a number)\n");
@@ -118,6 +118,7 @@ public class Menus {
 
         System.out.println("That's all!, creating a new Delivery...");
 
+        MenuTransition.Space();
 
         Main.ArrayLists.getDeliveries().add(new Delivery(pizza, pizza_size, zipcode, street, city, house_number, house_numberExtras));
 
