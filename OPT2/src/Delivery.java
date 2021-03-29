@@ -1,5 +1,8 @@
 import Enums.Pizza_size;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Delivery {
     private Pizza pizza;
     private Pizza_size pizza_size;
@@ -8,6 +11,7 @@ public class Delivery {
     private String city;
     private Integer house_number;
     private String house_numberExtras;
+    private String timeOfCreation;
 
     private final Double deliveryPrice;
 
@@ -21,15 +25,23 @@ public class Delivery {
         this.house_number = house_number;
         this.house_numberExtras = house_numberExtras;
 
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+
+        timeOfCreation = dtf.format(now);
         deliveryPrice = 1.5;
 
+    }
+
+    public String getTime(){
+        return timeOfCreation;
     }
 
     public Double getDeliveryPrice() {
         return deliveryPrice;
     }
 
-    public Double getTotalPriceDelivery(Double pricePizza, Double sizePrice, Double deliveryPrice){
+    public static Double getTotalPriceDelivery(Double pricePizza, Double sizePrice, Double deliveryPrice){
         return pricePizza + sizePrice + deliveryPrice;
     }
 

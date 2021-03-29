@@ -1,17 +1,20 @@
 import Enums.Pizza_size;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Menus {
 
-    static class MenuTransition{
+    static class MenuTools{
 
         //Will create a Space between panels
         private static void Space(){
             System.out.println("\n---------------------------------------\n");
         }
 
-        private static void Main() {MenuTransition.Space(); Panel_Mainmenu();}
+        private static void Main() {Space(); Panel_Mainmenu();}
+
 
     }
 
@@ -31,9 +34,9 @@ public class Menus {
 
         System.out.println("\nSelect your option:");
 
-        int selected = scanner.nextInt();
+        int selected = Tools.SafeIntegerInputWithInBounds(1, 4);
 
-        MenuTransition.Space();
+        MenuTools.Space();
 
         switch (selected) {
             case 1 -> {
@@ -47,14 +50,16 @@ public class Menus {
             }
             case 4 -> {
                 System.out.println("Panel: Main menu - More information about options\n");
-                System.out.println(" 1. Create new Delivery              - Here you create a new Delivery that will contain, pizza type, pizza size, Address of customer and total price of the Delivery.\n" +
-                        " 2. Edit or Delete an Delivery       - Here you Edit or Delete existing Delivery that where created by option 1.\n" +
-                        " 3. View Deliveries                  - Here you can view all existing Deliveries that where created by option 1.");
+                System.out.println( " 1. Create new Delivery              - Here you create a new Delivery that will contain, pizza type, pizza size, Address of customer and total price of the Delivery.\n" +
+                                    " 2. Edit or Delete an Delivery       - Here you Edit or Delete existing Delivery that where created by option 1.\n" +
+                                    " 3. View Deliveries                  - Here you can view all existing Deliveries that where created by option 1.");
             }
-            default -> System.out.println("Chosen number is out of bounds, please try again.");
         }
 
-        MenuTransition.Main();
+
+
+
+        MenuTools.Main();
 
     }
 
@@ -73,36 +78,31 @@ public class Menus {
         System.out.println("Before creating a new Delivery, you will have to fill in some laking information:");
         System.out.println("What type of pizza is it? (pick a number)\n");
 
-        for (int i = 0; i < Main.ArrayLists.getPizzas().size(); i++){
-            System.out.println(i+1 + ". " + Main.ArrayLists.getPizzas().get(i).getPizza_type());
+        for (int i = 0; i < Data.getPizzas().size(); i++){
+            System.out.println(i+1 + ". " + Data.getPizzas().get(i).getPizza_type());
         }
 
         System.out.println();
 
-        int ChosenPizza = scanner.nextInt() - 1;
 
-        if(ChosenPizza >= 0 && ChosenPizza < Main.ArrayLists.getPizzas().size()){
-            pizza = Main.ArrayLists.getPizzas().get(ChosenPizza);
-            System.out.println("You have chosen: " + pizza.getPizza_type());
-        }else{
-            System.out.println("Chosen number is out of bounds, please try again.");
-            return;
-        }
+
+        pizza = Data.getPizzas().get(Tools.SafeIntegerInputWithInBounds(1, Data.getPizzas().size()));
+        Tools.PrintTheChosenOne(pizza.getPizza_type());
+
 
         System.out.println("What is the size of the pizza (pick a number)\n");
         System.out.println("1. Small");
         System.out.println("2. Medium");
         System.out.println("3. Large");
 
-        pizza_size = switch (scanner.nextInt()) {
+        pizza_size = switch (Tools.SafeIntegerInputWithInBounds(1, 3)) {
             case 1 -> Pizza_size.Small;
             case 3 -> Pizza_size.Large;
             default -> Pizza_size.Medium;
         };
 
-        scanner.nextLine();
 
-        System.out.println("You have chosen: " + pizza_size);
+        Tools.PrintTheChosenOne(pizza_size);
 
         System.out.println("Enter Zip/postal code:");
         zipcode = scanner.nextLine();
@@ -111,30 +111,34 @@ public class Menus {
         System.out.println("Enter City name:");
         city = scanner.nextLine();
         System.out.println("Enter House number:");
-        house_number = scanner.nextInt();
+        house_number = Tools.SafeIntegerInput();
         scanner.nextLine();
         System.out.println("If needed an addition (If not, just keep it blank):");
         house_numberExtras = scanner.nextLine();
 
         System.out.println("That's all!, creating a new Delivery...");
 
-        MenuTransition.Space();
+        MenuTools.Space();
 
-        Main.ArrayLists.getDeliveries().add(new Delivery(pizza, pizza_size, zipcode, street, city, house_number, house_numberExtras));
+        Data.getDeliveries().add(new Delivery(pizza, pizza_size, zipcode, street, city, house_number, house_numberExtras));
 
-        System.out.println(Main.ArrayLists.getDeliveries().get(Main.ArrayLists.getDeliveries().size() - 1).getAllInformation());
+        System.out.println(Data.getDeliveries().get(Data.getDeliveries().size() - 1).getAllInformation());
 
         System.out.println("\nSuccessfully created a new Delivery,\nyou can see your deliveries in the Deliveries View in the Main menu.");
 
     }
 
     public static void Panel_ViewDeliveries(){
-        for (int i = 0; i < Main.ArrayLists.getDeliveries().size(); i++){
-            System.out.println("Delivery " + (i + 1) + " ----------------------------");
-            System.out.println(Main.ArrayLists.getDeliveries().get(i).getAllInformation());
+        for (int i = 0; i < Data.getDeliveries().size(); i++){
+
+            Delivery delivery = Data.getDeliveries().get(i);
+
+            System.out.println("Delivery " + (i + 1) + " ------------------- " + delivery.getTime());
+            System.out.println(delivery.getAllInformation());
             System.out.println();
         }
     }
+
 
 
 
