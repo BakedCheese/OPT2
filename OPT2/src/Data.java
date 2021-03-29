@@ -19,7 +19,7 @@ public class Data {
         return pizzas;
     }
 
-    public static ArrayList<Delivery> getDeliveries() {
+    protected static ArrayList<Delivery> getDeliveries() {
         return deliveries;
     }
 

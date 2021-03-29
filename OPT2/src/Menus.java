@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Menus {
 
+
     static class MenuTools{
 
         //Will create a Space between panels
@@ -22,19 +23,20 @@ public class Menus {
     public static void Panel_Mainmenu(){
 
         Scanner scanner = new Scanner(System.in);
+        Tools tools = new Tools();
 
         System.out.println("Panel: Main menu\n");
 
         System.out.println("Choose you next menu (pick a number)\n");
 
         System.out.println("1.  Create new Delivery");
-        System.out.println("2.  Edit or Delete an Delivery");
+        System.out.println("2.  Delete an Delivery");
         System.out.println("3.  View Delivery");
         System.out.println("4.  More information about options");
 
         System.out.println("\nSelect your option:");
 
-        int selected = Tools.SafeIntegerInputWithInBounds(1, 4);
+        int selected = tools.SafeIntegerInputWithInBounds(1, 4);
 
         MenuTools.Space();
 
@@ -43,7 +45,10 @@ public class Menus {
                 System.out.println("Panel: Main menu - Create new Delivery\n");
                 Panel_NewDelivery();
             }
-            case 2 -> System.out.println("Panel: Main menu - Edit or Delete an Delivery\n");
+            case 2 -> {
+                System.out.println("Panel: Main menu - Delete an Delivery\n");
+                Panel_DeleteDelivery();
+            }
             case 3 -> {
                 System.out.println("Panel: Main menu - View Delivery\n");
                 Panel_ViewDeliveries();
@@ -51,13 +56,10 @@ public class Menus {
             case 4 -> {
                 System.out.println("Panel: Main menu - More information about options\n");
                 System.out.println( " 1. Create new Delivery              - Here you create a new Delivery that will contain, pizza type, pizza size, Address of customer and total price of the Delivery.\n" +
-                                    " 2. Edit or Delete an Delivery       - Here you Edit or Delete existing Delivery that where created by option 1.\n" +
+                                    " 2. Delete an Delivery               - Here you Edit or Delete existing Delivery that where created by option 1.\n" +
                                     " 3. View Deliveries                  - Here you can view all existing Deliveries that where created by option 1.");
             }
         }
-
-
-
 
         MenuTools.Main();
 
@@ -66,6 +68,7 @@ public class Menus {
     public static void Panel_NewDelivery(){
 
         Scanner scanner = new Scanner(System.in);
+        Tools tools = new Tools();
 
         Pizza pizza = null;
         Pizza_size pizza_size;
@@ -86,8 +89,8 @@ public class Menus {
 
 
 
-        pizza = Data.getPizzas().get(Tools.SafeIntegerInputWithInBounds(1, Data.getPizzas().size()));
-        Tools.PrintTheChosenOne(pizza.getPizza_type());
+        pizza = Data.getPizzas().get(tools.SafeIntegerInputWithInBounds(1, Data.getPizzas().size()));
+        tools.PrintTheChosenOne(pizza.getPizza_type());
 
 
         System.out.println("What is the size of the pizza (pick a number)\n");
@@ -95,14 +98,14 @@ public class Menus {
         System.out.println("2. Medium");
         System.out.println("3. Large");
 
-        pizza_size = switch (Tools.SafeIntegerInputWithInBounds(1, 3)) {
+        pizza_size = switch (tools.SafeIntegerInputWithInBounds(1, 3)) {
             case 1 -> Pizza_size.Small;
             case 3 -> Pizza_size.Large;
             default -> Pizza_size.Medium;
         };
 
 
-        Tools.PrintTheChosenOne(pizza_size);
+        tools.PrintTheChosenOne(pizza_size);
 
         System.out.println("Enter Zip/postal code:");
         zipcode = scanner.nextLine();
@@ -111,7 +114,7 @@ public class Menus {
         System.out.println("Enter City name:");
         city = scanner.nextLine();
         System.out.println("Enter House number:");
-        house_number = Tools.SafeIntegerInput();
+        house_number = tools.SafeIntegerInput();
         scanner.nextLine();
         System.out.println("If needed an addition (If not, just keep it blank):");
         house_numberExtras = scanner.nextLine();
@@ -120,11 +123,37 @@ public class Menus {
 
         MenuTools.Space();
 
-        Data.getDeliveries().add(new Delivery(pizza, pizza_size, zipcode, street, city, house_number, house_numberExtras));
+        DeliveryHandler.AddDelivery(pizza, pizza_size, zipcode, street, city, house_number, house_numberExtras);
 
         System.out.println(Data.getDeliveries().get(Data.getDeliveries().size() - 1).getAllInformation());
 
         System.out.println("\nSuccessfully created a new Delivery,\nyou can see your deliveries in the Deliveries View in the Main menu.");
+
+    }
+
+    public static void Panel_DeleteDelivery(){
+
+        CustomTools tools = new CustomTools();
+
+
+        Panel_ViewDeliveries();
+
+        System.out.println();
+        System.out.println("Choose a Delivery to Delete");
+
+        int chosenDelivery = tools.SafeIntegerInputWithInBounds(1, DeliveryHandler.getDeliveries().size());
+
+        System.out.println("To confirm this deletion, type: \"delete\" ");
+        System.out.println("To cancel this deletion, type: \"exit\" ");
+
+
+
+        if(tools.SafeStringInputPlusIfStatement("delete", "exit")){
+            DeliveryHandler.DeleteDelivery(chosenDelivery);
+        }else{
+            return;
+        }
+
 
     }
 
@@ -138,6 +167,10 @@ public class Menus {
             System.out.println();
         }
     }
+
+
+
+
 
 
 
