@@ -1,3 +1,4 @@
+import Enums.Logs;
 import Enums.Pizza_size;
 import Tools.*;
 
@@ -34,28 +35,30 @@ public class Menus {
 
         System.out.println("\nSelect your option:");
 
-        int selected = Tools.SafeIntegerInputWithInBounds(1, 4);
-
         MenuTools.Space();
 
-        switch (selected) {
+        switch (Tools.SafeIntegerInputWithInBounds(1,4)) {
             case 1: {
                 System.out.println("Panel: Main menu - Create new Delivery\n");
                 Panel_NewDelivery();
+                break;
             }
             case 2: {
                 System.out.println("Panel: Main menu - Delete an Delivery\n");
                 Panel_DeleteDelivery();
+                break;
             }
             case 3: {
                 System.out.println("Panel: Main menu - View Delivery\n");
                 Panel_ViewDeliveries();
+                break;
             }
             case 4: {
                 System.out.println("Panel: Main menu - More information about options\n");
                 System.out.println( " 1. Create new Delivery              - Here you create a new Delivery that will contain, pizza type, pizza size, Address of customer and total price of the Delivery.\n" +
                                     " 2. Delete an Delivery               - Here you Edit or Delete existing Delivery that where created by option 1.\n" +
                                     " 3. View Deliveries                  - Here you can view all existing Deliveries that where created by option 1.");
+                break;
             }
         }
 
@@ -72,7 +75,7 @@ public class Menus {
         String zipcode;
         String street;
         String city;
-        int house_number;
+        String house_number;
         String house_numberExtras;
 
         System.out.println("Before creating a new Delivery, you will have to fill in some laking information:");
@@ -111,8 +114,7 @@ public class Menus {
         System.out.println("Enter City name:");
         city = scanner.nextLine();
         System.out.println("Enter House number:");
-        house_number = Tools.SafeIntegerInput();
-        scanner.nextLine();
+        house_number = scanner.nextLine();
         System.out.println("If needed an addition (If not, just keep it blank):");
         house_numberExtras = scanner.nextLine();
 

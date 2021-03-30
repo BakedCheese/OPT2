@@ -9,14 +9,14 @@ public class Delivery {
     private String zipcode;
     private String street;
     private String city;
-    private Integer house_number;
+    private String house_number;
     private String house_numberExtras;
     private String timeOfCreation;
 
     private final Double deliveryPrice;
 
 
-    public Delivery(Pizza pizza, Pizza_size pizza_size, String zipcode, String street, String city, Integer house_number, String house_numberExtras) {
+    public Delivery(Pizza pizza, Pizza_size pizza_size, String zipcode, String street, String city, String house_number, String house_numberExtras) {
         this.pizza = pizza;
         this.pizza_size = pizza_size;
         this.zipcode = zipcode;
@@ -113,11 +113,11 @@ public class Delivery {
         this.city = city;
     }
 
-    public Integer getHouse_number() {
+    public String getHouse_number() {
         return house_number;
     }
 
-    public void setHouse_number(Integer house_number) {
+    public void setHouse_number(String house_number) {
         this.house_number = house_number;
     }
 
