@@ -15,11 +15,11 @@ public class Data {
         pizzas.add(new Pizza(Pizza_type.Tonno, 8.0));
     }
 
-    public static ArrayList<Pizza> getPizzas() {
+    protected ArrayList<Pizza> getPizzas() {
         return pizzas;
     }
 
-    protected static ArrayList<Delivery> getDeliveries() {
+    protected ArrayList<Delivery> getDeliveries() {
         return deliveries;
     }
 

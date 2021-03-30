@@ -7,22 +7,8 @@ import java.util.Scanner;
 public class Menus {
 
 
-    static class MenuTools{
-
-        //Will create a Space between panels
-        private static void Space(){
-            System.out.println("\n---------------------------------------\n");
-        }
-
-        private static void Main() {Space(); Panel_Mainmenu();}
-
-
-    }
-
 
     public static void Panel_Mainmenu(){
-
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Panel: Main menu\n");
 
@@ -35,7 +21,7 @@ public class Menus {
 
         System.out.println("\nSelect your option:");
 
-        MenuTools.Space();
+        CustomTools.Space();
 
         switch (Tools.SafeIntegerInputWithInBounds(1,4)) {
             case 1: {
@@ -62,15 +48,16 @@ public class Menus {
             }
         }
 
-        MenuTools.Main();
+        CustomTools.Space();
 
     }
 
-    public static void Panel_NewDelivery(){
+    private static void Panel_NewDelivery(){
 
         Scanner scanner = new Scanner(System.in);
+        DeliveryHandler deliveryHandler = new DeliveryHandler();
 
-        Pizza pizza = null;
+        Pizza pizza;
         Pizza_size pizza_size;
         String zipcode;
         String street;
@@ -81,15 +68,15 @@ public class Menus {
         System.out.println("Before creating a new Delivery, you will have to fill in some laking information:");
         System.out.println("What type of pizza is it? (pick a number)\n");
 
-        for (int i = 0; i < Data.getPizzas().size(); i++){
-            System.out.println(i+1 + ". " + Data.getPizzas().get(i).getPizza_type());
+        for (int i = 0; i < deliveryHandler.getPizzas().size(); i++){
+            System.out.println(i+1 + ". " + deliveryHandler.getPizzas().get(i).getPizza_type());
         }
 
         System.out.println();
 
 
 
-        pizza = Data.getPizzas().get(Tools.SafeIntegerInputWithInBounds(1, Data.getPizzas().size()));
+        pizza = deliveryHandler.getPizzas().get(Tools.SafeIntegerInputWithInBounds(1, deliveryHandler.getPizzas().size()));
         Tools.PrintTheChosenOne(pizza.getPizza_type());
 
 
@@ -99,9 +86,11 @@ public class Menus {
         System.out.println("3. Large");
 
         switch (Tools.SafeIntegerInputWithInBounds(1, 3)) {
-            case 1: pizza_size = Pizza_size.Small;
-            case 2: pizza_size =  Pizza_size.Large;
-            default: pizza_size = Pizza_size.Medium;
+            case 1: pizza_size = Pizza_size.Small; break;
+            case 2: pizza_size = Pizza_size.Medium; break;
+            case 3: pizza_size =  Pizza_size.Large; break;
+            default: pizza_size = Pizza_size.Medium; break;
+
         };
 
 
@@ -120,25 +109,25 @@ public class Menus {
 
         System.out.println("That's all!, creating a new Delivery...");
 
-        MenuTools.Space();
+        CustomTools.Space();
 
-        DeliveryHandler.AddDelivery(pizza, pizza_size, zipcode, street, city, house_number, house_numberExtras);
+        deliveryHandler.AddDelivery(pizza, pizza_size, zipcode, street, city, house_number, house_numberExtras);
 
-        System.out.println(Data.getDeliveries().get(Data.getDeliveries().size() - 1).getAllInformation());
+        System.out.println(deliveryHandler.getDeliveries().get(deliveryHandler.getDeliveries().size() - 1).getAllInformation());
 
         System.out.println("\nSuccessfully created a new Delivery,\nyou can see your deliveries in the Deliveries View in the Main menu.");
 
     }
 
-    public static void Panel_DeleteDelivery(){
-
+    private static void Panel_DeleteDelivery(){
+        DeliveryHandler deliveryHandler = new DeliveryHandler();
 
         Panel_ViewDeliveries();
 
         System.out.println();
         System.out.println("Choose a Delivery to Delete");
 
-        int chosenDelivery = Tools.SafeIntegerInputWithInBounds(1, DeliveryHandler.getDeliveries().size());
+        int chosenDelivery = Tools.SafeIntegerInputWithInBounds(1, deliveryHandler.getDeliveries().size());
 
         System.out.println("To confirm this deletion, type: \"delete\" ");
         System.out.println("To cancel this deletion, type: \"exit\" ");
@@ -146,7 +135,7 @@ public class Menus {
 
 
         if(CustomTools.SafeStringInputPlusIfStatement("delete", "exit")){
-            DeliveryHandler.DeleteDelivery(chosenDelivery);
+            deliveryHandler.DeleteDelivery(chosenDelivery);
         }else{
             return;
         }
@@ -154,10 +143,12 @@ public class Menus {
 
     }
 
-    public static void Panel_ViewDeliveries(){
-        for (int i = 0; i < Data.getDeliveries().size(); i++){
+    private static void Panel_ViewDeliveries(){
+        DeliveryHandler deliveryHandler = new DeliveryHandler();
 
-            Delivery delivery = Data.getDeliveries().get(i);
+        for (int i = 0; i < deliveryHandler.getDeliveries().size(); i++){
+
+            Delivery delivery = deliveryHandler.getDeliveries().get(i);
 
             System.out.println("Delivery " + (i + 1) + " ------------------- " + delivery.getTime());
             System.out.println(delivery.getAllInformation());

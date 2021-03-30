@@ -2,6 +2,8 @@ package Tools;
 
 import Enums.Logs;
 
+import java.awt.*;
+
 public class CustomTools extends Tools  {
 
     public static boolean SafeStringInputPlusIfStatement(String yes, String no){
@@ -23,6 +25,10 @@ public class CustomTools extends Tools  {
 
 
 
+    }
+
+    public static void Space(){
+        System.out.println("\n---------------------------------------\n");
     }
 
 }
