@@ -98,11 +98,6 @@ public class Tools{
         return input;
     }
 
-    public static void DisplayMenuName(String text){
-        System.out.println(text);
-        System.out.println();
-    }
-
     public static void PrintTheChosenOne(String chosen){
         System.out.println("You have chosen: " + chosen);
         System.out.println();
@@ -116,6 +111,31 @@ public class Tools{
     public static void PrintTheChosenOne(Enum chosen){
         System.out.println("You have chosen: " + chosen.toString());
         System.out.println();
+    }
+
+    public static boolean SafeStringInputPlusIfStatement(String yes, String no){
+
+        while (true){
+            String temp = SafeStringInput();
+
+            if(temp.equals(yes)){
+                return true;
+            }
+            else if(temp.equals(no)){
+                return false;
+            }else{
+                Logs.NotValid.PrintOutLog();
+            }
+
+        }
+
+
+
+
+    }
+
+    public static void Space(){
+        System.out.println("\n---------------------------------------\n");
     }
 
 

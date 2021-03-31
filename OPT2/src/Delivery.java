@@ -1,11 +1,11 @@
-import Enums.Pizza_size;
+import Enums.Food_size;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Delivery {
-    private Pizza pizza;
-    private Pizza_size pizza_size;
+    private ArrayList<Food> foods = new ArrayList<>();
     private String zipcode;
     private String street;
     private String city;
@@ -16,9 +16,8 @@ public class Delivery {
     private final Double deliveryPrice;
 
 
-    public Delivery(Pizza pizza, Pizza_size pizza_size, String zipcode, String street, String city, String house_number, String house_numberExtras) {
-        this.pizza = pizza;
-        this.pizza_size = pizza_size;
+    public Delivery(ArrayList<Food> foods, String zipcode, String street, String city, String house_number, String house_numberExtras) {
+        this.foods = foods;
         this.zipcode = zipcode;
         this.street = street;
         this.city = city;
@@ -41,91 +40,71 @@ public class Delivery {
         return deliveryPrice;
     }
 
-    public static Double getTotalPriceDelivery(Double pricePizza, Double sizePrice, Double deliveryPrice){
-        return pricePizza + sizePrice + deliveryPrice;
-    }
 
     public String getAllInformation(){
 
 
-        return            "Pizza type:        " + getPizza().getPizza_type()
-                        + "\nPizza size:        " + getPizza_size()
-                        + "\n\nAddress:         "
-                        + "\nZip/postal code:   " + getZipcode()
-                        + "\nStreet name:       " + getStreet()
-                        + "\nCity name:         " + getCity()
-                        + "\nHouse number:      " + getHouse_number() + " Extra: " + getHouse_numberExtras()
-                        + "\n\nCost:            "
-                        + "\nCost of Pizza :    $ " + getPizza().getPrice()
-                        + "\nCost of Size:      $ " + getSizePrice()
-                        + "\nCost of Delivery:  $ " + getDeliveryPrice()
+        return            "\nMeals:                   " + getAllMeals()
+                        + "\n\nAddress:             "
+                        + "\nZip/postal code:       " + getZipcode()
+                        + "\nStreet name:           " + getStreet()
+                        + "\nCity name:             " + getCity()
+                        + "\nHouse number:          " + getHouse_number() + " Extra: " + getHouse_numberExtras()
+                        + "\n\nCost:                "
+                        + "\nTotal Cost of Meals:   $ " + TotalPriceOfMeals()
+                        + "\nCost of Delivery:      $ " + getDeliveryPrice()
                         + "\n"
-                        + "\nTotal Cost:        $ " + getTotalPriceDelivery(getPizza().getPrice(), getSizePrice(), getDeliveryPrice());
+                        + "\nTotal Cost:            $ " + (TotalPriceOfMeals() + getDeliveryPrice());
     }
 
 
-    private Double getSizePrice(){
-        return switch (getPizza_size()) {
-            case Small -> 0.0;
-            case Medium -> 1.0;
-            case Large -> 2.0;
-            default -> null;
-        };
+
+    private String getAllMeals(){
+        StringBuilder std = new StringBuilder();
+        std.append("\n");
+        for (Food food: getFoods()) {
+
+
+
+            std.append(" - " + food.getFoodType() + " ("  + food.getSize() + ")     = $ " + food.getPrice() + " + $ " + food.getSize().getPrice() + "\n");
+        }
+
+        return std.toString();
     }
 
-    public Pizza getPizza() {
-        return pizza;
+    public Double TotalPriceOfMeals(){
+
+        Double total = 0.0;
+        for (Food tempfood: getFoods()) {
+            total += tempfood.getPrice() + tempfood.getSize().getPrice();
+        }
+
+        return total;
     }
 
-    public void setPizza(Pizza pizza) {
-        this.pizza = pizza;
-    }
 
-    public Pizza_size getPizza_size() {
-        return pizza_size;
-    }
-
-    public void setPizza_size(Pizza_size pizza_size) {
-        this.pizza_size = pizza_size;
+    public ArrayList<Food> getFoods() {
+        return foods;
     }
 
     public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
     public String getStreet() {
         return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getHouse_number() {
         return house_number;
-    }
-
-    public void setHouse_number(String house_number) {
-        this.house_number = house_number;
     }
 
     public String getHouse_numberExtras() {
         return house_numberExtras;
     }
 
-    public void setHouse_numberExtras(String house_numberExtras) {
-        this.house_numberExtras = house_numberExtras;
-    }
 }

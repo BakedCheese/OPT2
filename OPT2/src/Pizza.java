@@ -1,19 +1,17 @@
 import Enums.Pizza_type;
 
-public class Pizza {
+public class Pizza extends Food {
     private Pizza_type pizza_type;
-    private Double price;
 
     public Pizza(Pizza_type pizza_type, Double price) {
         this.pizza_type = pizza_type;
-        this.price = price;
+        this.setPrice(price);
     }
 
-    public Pizza_type getPizza_type() {
+
+
+    @Override
+    public Enum getFoodType() {
         return pizza_type;
-    }
-
-    public Double getPrice() {
-        return price;
     }
 }

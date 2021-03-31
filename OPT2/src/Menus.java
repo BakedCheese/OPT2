@@ -1,7 +1,8 @@
-import Enums.Logs;
-import Enums.Pizza_size;
+import Enums.Food_size;
 import Tools.*;
 
+import javax.tools.Tool;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menus {
@@ -21,34 +22,39 @@ public class Menus {
 
         System.out.println("\nSelect your option:");
 
-        CustomTools.Space();
+
 
         switch (Tools.SafeIntegerInputWithInBounds(1,4)) {
             case 1: {
+                Tools.Space();
                 System.out.println("Panel: Main menu - Create new Delivery\n");
                 Panel_NewDelivery();
                 break;
             }
             case 2: {
+                Tools.Space();
                 System.out.println("Panel: Main menu - Delete an Delivery\n");
                 Panel_DeleteDelivery();
                 break;
             }
             case 3: {
+                Tools.Space();
                 System.out.println("Panel: Main menu - View Delivery\n");
                 Panel_ViewDeliveries();
                 break;
             }
             case 4: {
+                Tools.Space();
                 System.out.println("Panel: Main menu - More information about options\n");
-                System.out.println( " 1. Create new Delivery              - Here you create a new Delivery that will contain, pizza type, pizza size, Address of customer and total price of the Delivery.\n" +
-                                    " 2. Delete an Delivery               - Here you Edit or Delete existing Delivery that where created by option 1.\n" +
+                System.out.println( " 1. Create new Delivery              - Here you create a new Delivery.\n" +
+                                    " 2. Delete an Delivery               - Here you can Delete existing Delivery that where created by option 1.\n" +
                                     " 3. View Deliveries                  - Here you can view all existing Deliveries that where created by option 1.");
                 break;
             }
         }
 
-        CustomTools.Space();
+        Tools.Space();
+        Panel_Mainmenu();
 
     }
 
@@ -57,8 +63,8 @@ public class Menus {
         Scanner scanner = new Scanner(System.in);
         DeliveryHandler deliveryHandler = new DeliveryHandler();
 
-        Pizza pizza;
-        Pizza_size pizza_size;
+        ArrayList<Food> food = new ArrayList<>();
+        Food_size food_size;
         String zipcode;
         String street;
         String city;
@@ -66,53 +72,91 @@ public class Menus {
         String house_numberExtras;
 
         System.out.println("Before creating a new Delivery, you will have to fill in some laking information:");
-        System.out.println("What type of pizza is it? (pick a number)\n");
 
-        for (int i = 0; i < deliveryHandler.getPizzas().size(); i++){
-            System.out.println(i+1 + ". " + deliveryHandler.getPizzas().get(i).getPizza_type());
+        while (true){
+            System.out.println("Pizza or Pasta? (pick a number)\n");
+            System.out.println("1. Pizza");
+            System.out.println("2. Pasta");
+
+
+            if(Tools.SafeIntegerInputWithInBounds(1, 2).equals(1)){
+                System.out.println("What type of pizza is it? (pick a number)\n");
+
+                for (int i = 0; i < Data.getPizzas().size(); i++){
+                    System.out.println(i+1 + ". " + Data.getPizzas().get(i).getFoodType());
+                }
+
+                System.out.println();
+
+                food.add(Data.getPizzas().get(Tools.SafeIntegerInputWithInBounds(1, Data.getPizzas().size()) -1 ));
+            }else{
+                System.out.println("What type of pasta is it? (pick a number)\n");
+
+                for (int i = 0; i < Data.getPastas().size(); i++){
+                    System.out.println(i+1 + ". " + Data.getPastas().get(i).getFoodType());
+                }
+
+                System.out.println();
+
+                food.add(Data.getPastas().get(Tools.SafeIntegerInputWithInBounds(1, Data.getPastas().size()) -1));
+            }
+
+            Tools.PrintTheChosenOne(food.get(food.size() - 1).getFoodType());
+
+
+            System.out.println("What is the size of the meal (pick a number)\n");
+            System.out.println("1. Small");
+            System.out.println("2. Medium");
+            System.out.println("3. Large");
+
+
+            switch (Tools.SafeIntegerInputWithInBounds(1, 3)) {
+                case 1: food_size = Food_size.Small; break;
+                case 2: food_size = Food_size.Medium; break;
+                case 3: food_size =  Food_size.Large; break;
+                default: food_size = Food_size.Medium; break;
+
+            };
+
+            food.get(food.size() - 1).setSize(food_size);
+
+            Tools.PrintTheChosenOne(food_size);
+
+            System.out.println("Is that it? (pick a number)\n");
+            System.out.println("1. No, I want to order more.");
+            System.out.println("2. Yes, I'm done.");
+
+            if (Tools.SafeIntegerInputWithInBounds(1,2).equals(1)){
+                Tools.Space();
+            }else{
+                break;
+            }
+
         }
-
-        System.out.println();
-
-
-
-        pizza = deliveryHandler.getPizzas().get(Tools.SafeIntegerInputWithInBounds(1, deliveryHandler.getPizzas().size()));
-        Tools.PrintTheChosenOne(pizza.getPizza_type());
-
-
-        System.out.println("What is the size of the pizza (pick a number)\n");
-        System.out.println("1. Small");
-        System.out.println("2. Medium");
-        System.out.println("3. Large");
-
-        switch (Tools.SafeIntegerInputWithInBounds(1, 3)) {
-            case 1: pizza_size = Pizza_size.Small; break;
-            case 2: pizza_size = Pizza_size.Medium; break;
-            case 3: pizza_size =  Pizza_size.Large; break;
-            default: pizza_size = Pizza_size.Medium; break;
-
-        };
-
-
-        Tools.PrintTheChosenOne(pizza_size);
 
         System.out.println("Enter Zip/postal code:");
         zipcode = scanner.nextLine();
+        Tools.PrintTheChosenOne(zipcode);
         System.out.println("Enter Street name:");
         street = scanner.nextLine();
+        Tools.PrintTheChosenOne(street);
         System.out.println("Enter City name:");
         city = scanner.nextLine();
+        Tools.PrintTheChosenOne(city);
         System.out.println("Enter House number:");
         house_number = scanner.nextLine();
+        Tools.PrintTheChosenOne(house_number);
         System.out.println("If needed an addition (If not, just keep it blank):");
         house_numberExtras = scanner.nextLine();
+        Tools.PrintTheChosenOne(house_numberExtras);
 
         System.out.println("That's all!, creating a new Delivery...");
 
-        CustomTools.Space();
+        Tools.Space();
 
-        deliveryHandler.AddDelivery(pizza, pizza_size, zipcode, street, city, house_number, house_numberExtras);
+        deliveryHandler.AddDelivery(food, zipcode, street, city, house_number, house_numberExtras);
 
+        System.out.println("Delivery " + (deliveryHandler.getDeliveries().size()) + " ------------------- " + deliveryHandler.getDeliveries().get(deliveryHandler.getDeliveries().size() - 1).getTime());
         System.out.println(deliveryHandler.getDeliveries().get(deliveryHandler.getDeliveries().size() - 1).getAllInformation());
 
         System.out.println("\nSuccessfully created a new Delivery,\nyou can see your deliveries in the Deliveries View in the Main menu.");
@@ -129,18 +173,18 @@ public class Menus {
 
         int chosenDelivery = Tools.SafeIntegerInputWithInBounds(1, deliveryHandler.getDeliveries().size());
 
+        Tools.PrintTheChosenOne(chosenDelivery);
+
         System.out.println("To confirm this deletion, type: \"delete\" ");
         System.out.println("To cancel this deletion, type: \"exit\" ");
 
-
-
-        if(CustomTools.SafeStringInputPlusIfStatement("delete", "exit")){
+        if(Tools.SafeStringInputPlusIfStatement("delete", "exit")){
             deliveryHandler.DeleteDelivery(chosenDelivery);
+            Tools.PrintTheChosenOne("delete");
         }else{
+            Tools.PrintTheChosenOne("exit");
             return;
         }
-
-
     }
 
     private static void Panel_ViewDeliveries(){
