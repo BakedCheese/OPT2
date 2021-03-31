@@ -1,13 +1,10 @@
 import Enums.Food_size;
 import Tools.*;
 
-import javax.tools.Tool;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menus {
-
-
 
     public static void Panel_Mainmenu(){
 

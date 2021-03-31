@@ -4,7 +4,9 @@
     <list default="true" id="d7580268-0708-4e66-8adb-1bf0c72f8987" name="Default Changelist" comment="Some big changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OPT2/src/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/Delivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2/test/DeliveryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/test/DeliveryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OPT2/src/DeliveryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/DeliveryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OPT2/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OPT2/src/Menus.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/Menus.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617207148667</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Some big changes">
+      <created>1617213293635</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1617213293635</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

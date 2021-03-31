@@ -4,9 +4,6 @@ public class Main {
         Data.Hardcode_Food();
         Menus.Panel_Mainmenu();
     }
-
-
-
 }
 
 
