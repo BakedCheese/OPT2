@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7580268-0708-4e66-8adb-1bf0c72f8987" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/OPT2/src/Enums/Food_size.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OPT2/src/Enums/Pasta_type.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OPT2/src/Food.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OPT2/src/Pasta.java" afterDir="false" />
+    <list default="true" id="d7580268-0708-4e66-8adb-1bf0c72f8987" name="Default Changelist" comment="Some big changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2/src/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OPT2/src/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/Delivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2/src/DeliveryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/DeliveryHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2/src/Enums/Pizza_size.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2/src/Menus.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/Menus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2/src/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/Pizza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2/src/Tools/CustomTools.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPT2/src/Tools/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/src/Tools/Tools.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OPT2/test/DeliveryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/OPT2/test/DeliveryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,6 +111,14 @@
       <option name="presentableId" value="Default" />
       <updated>1617104764467</updated>
     </task>
+    <task id="LOCAL-00001" summary="Some big changes">
+      <created>1617207148667</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617207148667</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -137,5 +132,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Some big changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some big changes" />
   </component>
 </project>

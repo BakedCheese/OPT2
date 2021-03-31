@@ -17,8 +17,6 @@ class DeliveryTest {
 
         ArrayList<Food> food = new ArrayList<>();
 
-
-
         food.add(Data.getPastas().get(0)); // spaghetti 7.0 +
         food.get(food.size() - 1).setSize(Food_size.Medium); // 2.0
         food.add(Data.getPizzas().get(0)); // Pepperoni 7.5 +

@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class Delivery {
     private ArrayList<Food> foods = new ArrayList<>();
-    private String zipcode;
-    private String street;
-    private String city;
-    private String house_number;
-    private String house_numberExtras;
-    private String timeOfCreation;
+    private final String zipcode;
+    private final String street;
+    private final String city;
+    private final String house_number;
+    private final String house_numberExtras;
+    private final String timeOfCreation;
 
     private final Double deliveryPrice;
 
@@ -44,14 +44,15 @@ public class Delivery {
     public String getAllInformation(){
 
 
-        return            "\nMeals:                   " + getAllMeals()
+        return            "\nMeals:                 "
+                        + "\n" + getAllMeals()
                         + "\n\nAddress:             "
                         + "\nZip/postal code:       " + getZipcode()
                         + "\nStreet name:           " + getStreet()
                         + "\nCity name:             " + getCity()
                         + "\nHouse number:          " + getHouse_number() + " Extra: " + getHouse_numberExtras()
                         + "\n\nCost:                "
-                        + "\nTotal Cost of Meals:   $ " + TotalPriceOfMeals()
+                        + "\nTotal Cost of Meal(s): $ " + TotalPriceOfMeals()
                         + "\nCost of Delivery:      $ " + getDeliveryPrice()
                         + "\n"
                         + "\nTotal Cost:            $ " + (TotalPriceOfMeals() + getDeliveryPrice());
@@ -60,16 +61,13 @@ public class Delivery {
 
 
     private String getAllMeals(){
-        StringBuilder std = new StringBuilder();
-        std.append("\n");
+        String std = "";
         for (Food food: getFoods()) {
 
-
-
-            std.append(" - " + food.getFoodType() + " ("  + food.getSize() + ")     = $ " + food.getPrice() + " + $ " + food.getSize().getPrice() + "\n");
+            std += " - " + food.getFoodType() + " (" + food.getSize() + ") = $ " + food.getPrice() + " + $ " + food.getSize().getPrice() + "\n";
         }
 
-        return std.toString();
+        return std;
     }
 
     public Double TotalPriceOfMeals(){
