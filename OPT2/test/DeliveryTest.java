@@ -1,5 +1,6 @@
 import Enums.Food_size;
 import Enums.Logs;
+import Enums.Pasta_type;
 import Enums.Pizza_type;
 import Tools.Tools;
 import org.junit.jupiter.api.Test;
@@ -13,14 +14,11 @@ class DeliveryTest {
     @Test
     void TestTotalMealPrize(){
 
-        Data.Hardcode_Food();
 
         ArrayList<Food> food = new ArrayList<>();
 
-        food.add(Data.getPastas().get(0)); // spaghetti 7.0 +
-        food.get(food.size() - 1).setSize(Food_size.Medium); // 2.0
-        food.add(Data.getPizzas().get(0)); // Pepperoni 7.5 +
-        food.get(food.size() - 1).setSize(Food_size.Medium); // 2.0
+        food.add(new Pasta(Pasta_type.spaghetti, Food_size.Medium)); // spaghetti 7.0 + 2.0
+        food.add(new Pizza(Pizza_type.Pepperoni, Food_size.Medium)); // Pepperoni 7.5 + 2.0
 
         Delivery delivery = new Delivery(food, "3223GC", "Hackfortstraat", "Hellevoetsluis", "21", "");
 
@@ -30,7 +28,7 @@ class DeliveryTest {
 
     @Test
     void TestPizzaType(){
-        Food pizza1 = new Pizza(Pizza_type.Quattro_Formaggi, 9.0);
+        Food pizza1 = new Pizza(Pizza_type.Quattro_Formaggi, Food_size.Medium);
 
         assertEquals("Quattro_Formaggi", pizza1.getFoodType().toString());
 
@@ -39,25 +37,20 @@ class DeliveryTest {
 
     @Test
     void AddAndDeleteFood(){
-        Data.Hardcode_Food();
 
         DeliveryHandler deliveryHandler = new DeliveryHandler();
 
         ArrayList<Food> food1 = new ArrayList<>();
 
-        food1.add(Data.getPastas().get(0)); // spaghetti 7.0 +
-        food1.get(food1.size() - 1).setSize(Food_size.Medium); // 2.0
-        food1.add(Data.getPizzas().get(0)); // Pepperoni 7.5 +
-        food1.get(food1.size() - 1).setSize(Food_size.Medium); // 2.0
+        food1.add(new Pasta(Pasta_type.spaghetti, Food_size.Medium)); // spaghetti 7.0 + 2.0
+        food1.add(new Pizza(Pizza_type.Pepperoni, Food_size.Medium)); // Pepperoni 7.5 + 2.0
 
         deliveryHandler.AddDelivery(food1, "3223GC", "Hackfortstraat", "Hellevoetsluis", "21", "");
 
         ArrayList<Food> food2 = new ArrayList<>();
 
-        food2.add(Data.getPastas().get(0)); // spaghetti 7.0 +
-        food2.get(food2.size() - 1).setSize(Food_size.Medium); // 2.0
-        food2.add(Data.getPizzas().get(0)); // Pepperoni 7.5 +
-        food2.get(food2.size() - 1).setSize(Food_size.Medium); // 2.0
+        food2.add(new Pasta(Pasta_type.spaghetti, Food_size.Medium)); // spaghetti 7.0 + 2.0
+        food2.add(new Pizza(Pizza_type.Pepperoni, Food_size.Medium)); // Pepperoni 7.5 + 2.0
 
         deliveryHandler.AddDelivery(food2, "3223GC", "Hackfortstraat", "Hellevoetsluis", "21", "");
 

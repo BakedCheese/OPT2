@@ -60,7 +60,7 @@ public class Delivery {
 
     private String getAllMeals(){
         String std = "";
-        for (Food food: getFoods()) {
+        for (Food food: foods) {
 
             std += " - " + food.getFoodType() + " (" + food.getSize() + ") = $ " + food.getPrice() + " + $ " + food.getSize().getPrice() + "\n";
         }

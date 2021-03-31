@@ -1,11 +1,12 @@
+import Enums.Food_size;
 import Enums.Pasta_type;
 
 public class Pasta extends Food {
     private Pasta_type pasta_type;
 
-    public Pasta(Pasta_type pasta_type, Double price) {
+    public Pasta(Pasta_type pasta_type, Food_size size) {
         this.pasta_type = pasta_type;
-        this.setPrice(price);
+        this.setSize(size);
     }
 
 
@@ -13,4 +14,10 @@ public class Pasta extends Food {
     public Enum getFoodType() {
         return pasta_type;
     }
+
+    @Override
+    public double getPrice() {
+        return pasta_type.getPrice();
+    }
+
 }

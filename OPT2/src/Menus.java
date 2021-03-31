@@ -1,4 +1,6 @@
 import Enums.Food_size;
+import Enums.Pasta_type;
+import Enums.Pizza_type;
 import Tools.*;
 
 import java.util.ArrayList;
@@ -75,30 +77,51 @@ public class Menus {
             System.out.println("1. Pizza");
             System.out.println("2. Pasta");
 
+            Pizza_type pizza_type = null;
+            Pasta_type pasta_type = null;
+            Food_size size = null;
 
-            if(Tools.SafeIntegerInputWithInBounds(1, 2).equals(1)){
+            int chosen = Tools.SafeIntegerInputWithInBounds(1, 2);
+
+            if(chosen == 1){
                 System.out.println("What type of pizza is it? (pick a number)\n");
 
-                for (int i = 0; i < Data.getPizzas().size(); i++){
-                    System.out.println(i+1 + ". " + Data.getPizzas().get(i).getFoodType());
-                }
+                System.out.println("1. " + Pizza_type.Margherita);
+                System.out.println("2. " + Pizza_type.Pepperoni);
+                System.out.println("3. " + Pizza_type.Quattro_Formaggi);
+                System.out.println("4. " + Pizza_type.Tonno);
 
                 System.out.println();
 
-                food.add(Data.getPizzas().get(Tools.SafeIntegerInputWithInBounds(1, Data.getPizzas().size()) -1 ));
+                switch (Tools.SafeIntegerInputWithInBounds(1, 4)){
+                    case 1: pizza_type = Pizza_type.Margherita; break;
+                    case 2: pizza_type = Pizza_type.Pepperoni; break;
+                    case 3: pizza_type = Pizza_type.Quattro_Formaggi; break;
+                    case 4: pizza_type = Pizza_type.Tonno; break;
+                }
+
+                Tools.PrintTheChosenOne(pizza_type);
+
             }else{
                 System.out.println("What type of pasta is it? (pick a number)\n");
 
-                for (int i = 0; i < Data.getPastas().size(); i++){
-                    System.out.println(i+1 + ". " + Data.getPastas().get(i).getFoodType());
-                }
+                System.out.println("1. " + Pasta_type.spaghetti);
+                System.out.println("2. " + Pasta_type.Lasagne);
+                System.out.println("3. " + Pasta_type.Carbonara);
 
                 System.out.println();
 
-                food.add(Data.getPastas().get(Tools.SafeIntegerInputWithInBounds(1, Data.getPastas().size()) -1));
+                switch (Tools.SafeIntegerInputWithInBounds(1, 3)){
+                    case 1: pasta_type = Pasta_type.spaghetti; break;
+                    case 2: pasta_type = Pasta_type.Lasagne; break;
+                    case 3: pasta_type = Pasta_type.Carbonara; break;
+                }
+
+                Tools.PrintTheChosenOne(pasta_type);
+
             }
 
-            Tools.PrintTheChosenOne(food.get(food.size() - 1).getFoodType());
+
 
 
             System.out.println("What is the size of the meal (pick a number)\n");
@@ -108,16 +131,21 @@ public class Menus {
 
 
             switch (Tools.SafeIntegerInputWithInBounds(1, 3)) {
-                case 1: food_size = Food_size.Small; break;
-                case 2: food_size = Food_size.Medium; break;
-                case 3: food_size =  Food_size.Large; break;
-                default: food_size = Food_size.Medium; break;
-
+                case 1: size = Food_size.Small; break;
+                case 2: size = Food_size.Medium; break;
+                case 3: size = Food_size.Large; break;
             };
 
-            food.get(food.size() - 1).setSize(food_size);
 
-            Tools.PrintTheChosenOne(food_size);
+
+            Tools.PrintTheChosenOne(size);
+
+            if(chosen == 1){
+                food.add(new Pizza(pizza_type, size));
+            }else{
+                food.add(new Pasta(pasta_type, size));
+            }
+
 
             System.out.println("Is that it? (pick a number)\n");
             System.out.println("1. No, I want to order more.");
